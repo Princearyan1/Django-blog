@@ -1,0 +1,98 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .cardd {
+        background-color: #fff;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .cardd img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+    }
+
+    .cardd h1 {
+        font-size: 24px;
+        margin: 20px 0 10px;
+    }
+
+    .cardd p.title {
+        color: gray;
+        font-size: 18px;
+        margin: 5px 0;
+    }
+
+    .cardd a {
+        text-decoration: none;
+        color: #2196F3;
+        margin: 0 5px;
+    }
+
+    .cardd a:hover {
+        color: #0b7dda;
+    }
+
+    .form-group {
+        margin: 20px 0;
+    }
+
+    .btn-profile {
+        display: inline-block;
+        background-color: #2196F3;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .btn-profile:hover {
+        background-color: #0b7dda;
+    }
+</style>
+
+<div class="cardd">
+    <div class="m-b-25">
+        <img id="profile-img" src="{{ user.profile.image.url }}" alt="User-Profile-Image">
+    </div>
+
+    <h1 id="profile-h1">{{ user.username|title }}</h1>
+    <p class="title">{{ user.email }}</p>
+
+    <div>
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+    </div>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+    </form>
+
+    <p>
+        <a href="{% url 'profile-update' %}" class="btn-profile">
+            Update Profile
+        </a>
+    </p>
+</div>
+{% endblock content %}

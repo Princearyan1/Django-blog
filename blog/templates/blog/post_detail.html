@@ -1,0 +1,97 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<style>
+  body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+  }
+
+  .content-section {
+      background-color: #f9f9f9;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .article-img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      float: left;
+      margin-right: 20px;
+  }
+
+  .article-metadata {
+      font-size: 14px;
+      color: #555;
+  }
+
+  .article-title {
+      font-size: 24px;
+      color: #333;
+      text-decoration: none;
+  }
+
+  .article-title:hover {
+      color: #007BFF;
+  }
+
+  .article-content {
+      font-size: 16px;
+      color: #666;
+  }
+
+  .badge {
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+  }
+
+  .badge-warning {
+      background-color: #ffc107;
+      color: #212529;
+  }
+
+  .badge-success {
+      background-color: #28a745;
+      color: #fff;
+  }
+
+  .badge-danger {
+      background-color: #dc3545;
+      color: #fff;
+  }
+</style>
+<article class="media content-section" style="padding: 20px; border-radius: 10px;">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url|default:'path/to/default-image.jpg' }}" alt="Profile Image">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_posted }}</small> <br>
+            {% if object.status == 'P' %}
+                <span class="badge badge-warning">Pending</span>
+                {% if user.is_superuser %}
+                    <a class="btn btn-outline-success" href="{% url 'approve-post' object.id %}">Approve</a>
+                    <a class="btn btn-outline-danger" href="{% url 'reject-post' object.id %}">Reject</a>
+                {% endif %}
+            {% elif object.status == 'A' %}
+                <span class="badge badge-success">Approved</span>
+            {% elif object.status == 'R' %}
+                <span class="badge badge-danger">Rejected</span>
+            {% endif %}
+            {% if object.author == user %}
+                <div>
+                    <a class="btn btn-outline-success" href="{% url 'blog-update' object.id %}">Update</a>
+                    <a class="btn btn-outline-danger" href="{% url 'blog-delete' object.id %}">Delete</a>
+                </div>
+            {% endif %}
+        </div>
+        <h2>{{ object.title }}</h2>
+        <p class="article-content">{{ object.content }}</p>
+    </div>
+    <br>
+</article>
+{% endblock content %}

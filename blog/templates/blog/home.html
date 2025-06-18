@@ -1,0 +1,83 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<style>
+    body {
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .content-section {
+        background-color: #f9f9f9;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .article-img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        float: left;
+        margin-right: 20px;
+    }
+
+    .article-metadata {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .article-title {
+        font-size: 24px;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .article-title:hover {
+        color: #007BFF;
+    }
+
+    .article-content {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .badge {
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
+    .badge-warning {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+</style>
+
+{% for post in posts %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt="">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted }}</small>
+                {% if post.status == 'P' %}
+                    <span class="badge badge-warning">Pending</span>
+                {% elif post.status == 'A' %}
+                    <span class="badge badge-success">Approved</span>
+                {% endif %}
+            </div>
+            <h2><a class="article-title" href="{% url 'blog-detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+        </div>
+        <br>
+    </article>
+{% endfor %}
+{% endblock content %}
