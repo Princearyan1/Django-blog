@@ -27,8 +27,22 @@ A personal blogging platform built using **Django**, offering a clean interface 
 
 ## 📦 Setup Instructions
 
-1. **Clone the repository:**
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/Princearyan1/Django-blog.git
    cd Django-blog
+2.Create a virtual environment and activate it:
+
+   python -m venv venv
+   venv\Scripts\activate    
+
+3.Install project dependencies
+   pip install -r requirements.txt
+
+4.Run Django database migrations
+   python manage.py makemigrations
+   python manage.py migrate
+
+5.Start the local development server
+   python manage.py runserver
