@@ -1,4 +1,4 @@
-
+https://github.com/Princearyan1/Django-blog/blob/179332f5a097e00e362380146a4774a516d6df68/Screenshot%20(14).png
 # 📝 Django Blog
 
 A personal blogging platform built using Django, offering a clean interface for creating, editing, and deleting blog posts. This project is ideal for learning Django fundamentals like models, views, templates, authentication, and CRUD operations.
