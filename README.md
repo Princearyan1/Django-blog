@@ -1,7 +1,7 @@
 
 # 📝 Django Blog
 
-A personal blogging platform built using **Django**, offering a clean interface for creating, editing, and deleting blog posts. This project is ideal for learning Django fundamentals like models, views, templates, authentication, and CRUD operations.
+A personal blogging platform built using Django, offering a clean interface for creating, editing, and deleting blog posts. This project is ideal for learning Django fundamentals like models, views, templates, authentication, and CRUD operations.
 
 ---
 
